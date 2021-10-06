@@ -1,14 +1,18 @@
-import os
-import random
+import json
+from random import sample
 
-place_dict = {
-"h" : ["Hungaria" , "Havana"],
-"e" : ["Ernakulam" , "Edapally"],
-"l" : ["London" , "Los Angeles"],
-"o" : ["Ottapalam" , "Olavakode"],
-}
-msg = "hello"
+with open('places.json', 'r') as file:
+    places_dict = json.loads(file.read())
 
-for element in msg:
-	print(place_dict[element][random.randrange(0,len(place_dict[element]))])
+random_text = 'hello world'.upper()
 
+new_text = ''
+for char in random_text:
+    try:
+        new_text += sample(place_dict[char],1)[0]
+    except KeyError:
+        pass
+    new_text += ' '
+
+	
+print(new_text)
